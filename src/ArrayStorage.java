@@ -3,12 +3,12 @@
  */
 public class ArrayStorage {
     Resume[] storage = new Resume[10000];
-    private int size = 0;
+    private int size;
 
     void clear() {
         //storage = new Resume[10000];
-        for (int x = 0; x <= size()-1; x++) {
-            storage[x] = null;
+        for (int i = 0; i < size; i++) {
+            storage[i] = null;
         }
         size = 0;
     }
@@ -19,41 +19,42 @@ public class ArrayStorage {
     }
 
     Resume get(String uuid) {
-        Resume r = new Resume();
-        for(int x = 0; x <= size()-1; x++){
-            if (storage[x].toString() == uuid) {
-                r = storage[x];
+        //Resume r = new Resume();
+        for (int i = 0; i < size; i++) {
+            if (storage[i].toString() == uuid) {
+                return storage[i];
             }
             break;
         }
         //return (Resume) Arrays.stream(storage).filter(s -> Objects.nonNull(s)).filter(s -> s.toString() == uuid);
-        return r;
-
+        return null;
     }
 
     void delete(String uuid) {
-        for (int x = 0; x<=size()-1; x++) {
-            if(storage[x].toString() == uuid){
-                for(int y = x; y <=size()-2; y++){
-                    storage[y] = storage[y+1];
+        for (int i = 0; i < size ; i++) {
+            if (storage[i].toString() == uuid) {
+                for (int j = i; j <= size - 2; j++) {
+                    storage[j] = storage[j + 1];
+
                 }
+                size--;
                 break;
             }
         }
         //storage = Arrays.stream(storage).filter(s -> Objects.nonNull(s)).filter(s -> s.toString() != uuid).toArray(Resume[]::new);
-        size--;
+
     }
 
     /**
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        Resume[] newStorage = new Resume[size()];
-        for (int x = 0; x <= size()-1; x++) {
-            newStorage[x] = storage[x];
+        Resume[] resumes = new Resume[size];
+        for (int i = 0; i < size; i++) {
+            resumes[i] = storage[i];
         }
-        //newStorage = Arrays.stream(storage).filter(s -> Objects.nonNull(s)).toArray(Resume[]::new);
-        return newStorage;
+        //resumes = Arrays.stream(storage).filter(s -> Objects.nonNull(s)).toArray(Resume[]::new);
+        return resumes;
     }
 
     int size() {
