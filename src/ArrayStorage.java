@@ -31,7 +31,7 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
-        for (int i = 0; i < size ; i++) {
+        for (int i = 0; i < size; i++) {
             if (storage[i].toString() == uuid) {
                 for (int j = i; j <= size - 2; j++) {
                     storage[j] = storage[j + 1];
